@@ -213,7 +213,7 @@ async function main(){
   if (btnNew) btnNew.onclick = ()=>{ newParcel(); showToast("Nueva parcela."); };
 
   const btnExport = document.getElementById("btnExportParcelas");
-  if (btnExport) btnExport.onclick = ()=>exportParcelasCSV(schema);
+  if (btnExport) btnExport.onclick = async ()=>{ await exportParcelasCSV(schema); };
 
   document.addEventListener("click", async (e) => {
     const t = e.target;

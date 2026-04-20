@@ -30,8 +30,10 @@ async function withStore(storeName,mode,fn){
     const s=tx.objectStore(storeName);
     let result;
 
-    Promise.resolve()
-      .then(()=>fn(s))
+    // fn(s) must be called synchronously so the IDB request is created
+    // while the transaction is still active. Wrapping in Promise.resolve()
+    // would defer it to a microtask after the transaction auto-commits.
+    fn(s)
       .then((r)=>(result=r))
       .catch(reject);
 
